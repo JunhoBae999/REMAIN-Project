@@ -1,4 +1,4 @@
-import web3 from './web3';
+import web3 from './web3.js';
 
 //contract address
 const address = "0x7d91ed4cd10929d4cc6634cc1d77809d6262bbcc"

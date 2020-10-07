@@ -1,18 +1,9 @@
 import React from 'react';
 import styled from "styled-components";
 import {AiOutlineLeft} from "react-icons/ai";
-import RemainToken from "../RemainToken.js";
-import web3 from "../web3.js";
 
  
-export default function Poster() {
-
-  var data;
-
-  RemainToken.events.Locations({filter:{_courseId:"36864917885414268870132059435602256107039667340339441452446531848556956815160"},fromBlock: 0,},function(error, event){ data = event.returnValues['_locname'];   console.log(data)
-})
-
-console.log(data)
+export default function Poster({data}) {
  
   return (
     <Main>
@@ -23,7 +14,7 @@ console.log(data)
         </View>
         <View>
           <AiOutlineLeft color='white' />
-          <Second>제주를 4.3 사건을 따라가다</Second>
+          <Second>{data}</Second>
         </View>
         <View>
           <First>제작 : 배준호</First>
