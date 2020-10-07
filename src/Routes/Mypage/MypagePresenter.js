@@ -2,23 +2,75 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { AiOutlineSetting } from "react-icons/ai";
 import { authService} from 'fbase';
+import { useHistory } from 'react-router-dom';
 
 export default function MypageScreen(user) {
+  console.log(user);
+  const [username, setName] = useState(user.user.displayName);
+  const [userface, setFace] = useState(user.user.photoURL);
+  const [newAccount, setNewAccount] = useState(true);
+  const [error, setError] = useState("");
+  const onChange = (event) => {
+    const {
+      target: { name, value },
+    } = event;
+    if (name === "name") {
+      setName(value);
+    } else if (name === "face") {
+      setFace(value);
+    }
+  };
+  const toggleAccount = () => setNewAccount((prev) => !prev);
+  const onSubmit = async (event) => {
+    event.preventDefault();    
+    try {
+      var user = await authService.currentUser;
+      user.updateProfile({
+          displayName: username,
+          photoURL: userface,
+        })
+    } catch (error) {
+      console.log('error');
+      alert(error.message);
+    }
+  }
+
     return (
 <Main>
   <View>
-  <Img src={user.user.photoURL} width='200' height='200'/>
+  <Img src={userface} width='200' height='200'/>
   </View>
   <View >
     <Span>
-    {user.user.displayName}  
-      <AiOutlineSetting />
+    {username}  
+      <AiOutlineSetting onClick={toggleAccount}/>
     </Span>
   </View>
   <View>
     <Detail>MEMBER| LV.1 루키|</Detail>
     <Detail>가입일 {user.user.time.substr(4,12)}</Detail>
   </View>
+
+  {!newAccount ? (
+      <Loginbox onSubmit={onSubmit} className="container">
+        <Logins 
+          name="name"
+          placeholder="Name"
+          required value={username}
+          className="authInput"
+          onChange={onChange}  />
+        <Logins 
+          name="face"
+          placeholder="faceUrl"
+          required value={userface}
+          className="authInput"
+          onChange={onChange}  />
+        <LoginBtn onClick={onSubmit} className="authSwitch">
+          <LoginBtntext >회원정보 수정</LoginBtntext>
+        </LoginBtn>
+      </Loginbox>
+      ) : (
+  <Contents2>
   <Contents>
     <Content>
       <Number>10</Number>
@@ -43,6 +95,8 @@ export default function MypageScreen(user) {
       <Naming>지갑</Naming>
     </Content>
   </Contents>
+  </Contents2>
+      )}  
 </Main>
 );
 };
@@ -118,6 +172,11 @@ const Contents = styled.li`
     padding-right : 5px;
     align-self: center;
 `;
+const Contents2 = styled.li`
+    display: flex;
+    flex: 3;
+    flex-direction: column;
+`;
 
 const Content = styled.li`
     display: flex;
@@ -129,3 +188,51 @@ const Content = styled.li`
     border-right : 1px solid #DDDDDD;
     border-left : 1px solid #DDDDDD;
 `;
+
+const Loginbox = styled.form`
+   align-self: center;
+   flex : 3;
+   justify-content: center;
+   align-items: center;
+   width : 70%;
+   display: flex;
+   flex-direction: column;
+`
+const Logins = styled.input`
+border: none;
+font-size: 15px;
+width: 100%;
+max-width: 400;
+border-bottom : 1px solid #BBBBBB;
+padding-bottom : 10px;
+margin-top: 10px;
+`
+
+
+
+
+const Btnbox = styled.li`
+flex : 3;
+justify-content : center;
+width: 85%;
+max-width : 700;
+display: flex;
+flex-direction: column;
+`
+
+const LoginBtn = styled.span`
+   background-color: black;
+   border-radius: 15px;
+   margin-top : 10px;
+   height : 40px;
+   width : 200px;
+   display: flex;
+   justify-content: center;
+   align-items : center;
+`
+const LoginBtntext = styled.span`
+   font-size : 20px;
+   color: white;
+   font-weight : bold;
+   text-align : center;
+`

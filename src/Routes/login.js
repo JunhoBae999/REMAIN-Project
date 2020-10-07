@@ -43,7 +43,11 @@ export default function Login() {
         var user = await authService.currentUser;
         user.updateProfile({
             displayName: username,
-            photoURL: userface
+            photoURL: userface,
+            approved : 0,
+            scrap : 0,
+            donation : 0,
+            nft: 0
           }).then()
           } else {
         data = await authService.signInWithEmailAndPassword(email, password);        

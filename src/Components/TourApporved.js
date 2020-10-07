@@ -10,8 +10,8 @@ export default function Poster() {
   var indexArray = new Array();
   var jejuHash = 36864917885414268870132059435602256107039667340339441452446531848556956815160;
   var jejuArray;
-
-  console.log(RemainToken.courseToLocations(36864917885414268870132059435602256107039667340339441452446531848556956815160));
+  console.log(RemainToken)
+  /*console.log(RemainToken.courseToLocations(36864917885414268870132059435602256107039667340339441452446531848556956815160));*/
 
   // console.log(a.args)
   return (
