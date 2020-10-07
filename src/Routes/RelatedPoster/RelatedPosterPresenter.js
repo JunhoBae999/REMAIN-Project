@@ -19,6 +19,7 @@ export default function Project() {
 }
 
 const Main = styled.ul`
+    padding-top : 20px;
     display: flex;
     flex-direction: column;
     padding-left : 10px;
