@@ -1,8 +1,33 @@
 import React from 'react';
 import styled from "styled-components";
 import {FaHandPointDown } from "react-icons/fa";
+import Funding from "../Funding.js";
+import web3 from "../web3.js";
 
 export default function Donation() {
+   ethereum.enable();
+
+   const onClick = async (event) => {
+      event.preventDefault();    
+      try {
+      const balance;  
+      const account = web3.eth.accounts[0];
+      const sendaddress;
+      
+      web3.eth.sendTrnasaction({from:account,to:'0x7dB3Ed482265AF68df9a447634E7eD908AF7F8Ef',value:0.0001},
+      function(err, transactionHash) {
+         console.log(transactionHash);
+         alert(transactionHash)
+      })
+      } catch (error) {
+        console.log('error');
+        alert(error.message);
+      }}
+
+
+
+
+
   return (
     <Main>
     <LineArea1>
