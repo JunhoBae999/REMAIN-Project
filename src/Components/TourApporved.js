@@ -1,10 +1,19 @@
 import React from 'react';
 import styled from "styled-components";
 import {AiOutlineLeft} from "react-icons/ai";
+import web3 from "../web3.js";
+import RemainToken from "../RemainToken";
 import { Link } from "react-router-dom";
 
  
 export default function Poster({location, description}) {
+
+  const onClick = async (event) => {
+    const accounts = await web3.eth.getAccounts();
+    await RemainToken.methods.verifyUserLocation(accounts[0],{location},"제주도를 따라가다.").send({from:accounts[0]},function(err,res) {
+      alert("인증되었습니다.")
+    })
+ }
  
   return (
     <Main to={`/theme/1/Map`}>
@@ -15,7 +24,7 @@ export default function Poster({location, description}) {
         </View>
         <View>
           <AiOutlineLeft color='white' />
-          <Second>{location}</Second>
+          <Second onClick = {onClick}>{location}</Second>
         </View>
         <View>
           <First>제작 : 배준호</First>
