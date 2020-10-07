@@ -22,6 +22,11 @@ export default function Donation() {
       setEth(value);
    };
    
+   const onCheck = async(event)=>{
+      const accounts = await web3.eth.getAccounts();
+      await Funding.methods.permited(projectname,"0x7dB3Ed482265AF68df9a447634E7eD908AF7F8Ef").send({from :accounts[0] , gas: 3000000}).then(alert("해당 프로젝트가 검증되었습니다."))
+    }
+
    const onSubmit = async (event) => {
       const accounts = await web3.eth.getAccounts();
       console.log(eth);
@@ -30,6 +35,8 @@ export default function Donation() {
          console.log(res)
          alert("이더는 스마트 컨트랙트에 보관됩니다. 기관의 사용내역이 인증되고난 후 실제 전송됩니다.")
       })
+      const ContractBalance = await web3.eth.getBalance("0x5ae57492a6f2183b973e658ebd529aee7e1d0313")
+      console.log(ContractBalance);
    }
    
    return (
@@ -44,6 +51,7 @@ export default function Donation() {
          <Span>4.3 평화재단에</Span>
          <Span>기부하고 싶어요!</Span>
         </Title>
+        <br></br>
         <SubTitle>4.3 ETH 모금중!</SubTitle>
   
         <Loginbox onSubmit={onSubmit}>
@@ -57,6 +65,9 @@ export default function Donation() {
             <LoginBtntext >기부하기!</LoginBtntext>
           </LoginBtn>
         </Loginbox>
+        <LoginBtn onClick={onCheck}>
+            <LoginBtntext >검증</LoginBtntext>
+          </LoginBtn>
         <LineArea2>
         <Line2 />
         </LineArea2>
@@ -65,6 +76,7 @@ export default function Donation() {
          <Span>전자 영수증, 전달 사진 등 모든 자료를 제출해주세요.</Span>
          <Span>랜덤 기부자에 의해 승인되면 토큰을 반환해드립니다.</Span>
         </Detail>
+        <br></br>
           <Btn>
             <Btntext>개인 회원 펀딩 참여하기</Btntext>
           </Btn>
