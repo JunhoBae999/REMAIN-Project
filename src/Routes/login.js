@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { authService } from "fbase.js";
+import { authService } from "fbase";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import web3 from "../web3.js"
@@ -12,6 +12,8 @@ export default function Login() {
   }
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setName] = useState("");
+  const [userface, setFace] = useState("");
   const [newAccount, setNewAccount] = useState(true);
   const [error, setError] = useState("");
   const onChange = (event) => {
@@ -22,6 +24,10 @@ export default function Login() {
       setEmail(value);
     } else if (name === "password") {
       setPassword(value);
+    } else if (name === "name") {
+      setName(value);
+    } else if (name === "face") {
+      setFace(value);
     }
   };
   const toggleAccount = () => setNewAccount((prev) => !prev);
@@ -34,9 +40,18 @@ export default function Login() {
           email,
           password
         );
-      } else {
+        var user = await authService.currentUser;
+        user.updateProfile({
+            displayName: username,
+            photoURL: userface,
+            approved : 0,
+            scrap : 0,
+            donation : 0,
+            nft: 0
+          }).then()
+          } else {
         data = await authService.signInWithEmailAndPassword(email, password);        
-      }
+         }
     } catch (error) {
       console.log('error');
       alert(error.message);
@@ -46,6 +61,7 @@ export default function Login() {
       <Mainbox>
         <Main>RE : Main</Main>
       </Mainbox>
+        {newAccount ? (
       <Loginbox onSubmit={onSubmit} className="container">
         <Logins name="email"
           type="email"
@@ -61,6 +77,35 @@ export default function Login() {
           className="authInput"
           onChange={onChange}  />
       </Loginbox>
+      ) : (
+      <Loginbox onSubmit={onSubmit} className="container">
+        <Logins name="email"
+          type="email"
+          required value={email}
+          onChange={onChange}
+          className="authInput"
+          placeholder='E-mail'  />
+        <Logins 
+          name="password"
+          type="password"
+          placeholder="Password"
+          required value={password}
+          className="authInput"
+          onChange={onChange}  />
+        <Logins 
+          name="name"
+          placeholder="Name"
+          required value={username}
+          className="authInput"
+          onChange={onChange}  />
+        <Logins 
+          name="face"
+          placeholder="faceUrl"
+          required value={userface}
+          className="authInput"
+          onChange={onChange}  />
+      </Loginbox>
+      )}
       <Btnbox>
         <LoginBtn onClick={onSubmit} className="authSwitch">
           <LoginBtntext >{newAccount ? ('로그인') : ('회원 등록')}</LoginBtntext>

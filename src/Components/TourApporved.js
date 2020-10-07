@@ -4,7 +4,7 @@ import {AiOutlineLeft} from "react-icons/ai";
 import RemainToken from "../RemainToken.js";
 import web3 from "../web3.js";
 
-
+ 
 export default function Poster() {
 
   var data;
@@ -14,9 +14,6 @@ export default function Poster() {
 
 console.log(data)
  
-
-
-
   return (
     <Main>
       <Img src={require('../assets/project3.jpg')} width='340' height='180' />
@@ -34,7 +31,7 @@ console.log(data)
       </MainProject>
     </Main>
   );
-}
+};
 
 const Main = styled.span`
     display: flex;
@@ -75,5 +72,5 @@ flex : 1;
 font-size: 20px;
 display: flex;
 align-items : center;
-`
+`;
 
