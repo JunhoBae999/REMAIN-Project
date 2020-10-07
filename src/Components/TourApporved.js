@@ -5,9 +5,15 @@ import RemainToken from "../RemainToken.js";
 import web3 from "../web3.js";
 
  
+export default function Poster() {
+  
+  var indexArray = new Array();
+  var jejuHash = 36864917885414268870132059435602256107039667340339441452446531848556956815160;
+  var jejuArray;
 
-const Poster =  () => {
+  console.log(RemainToken.courseToLocations(36864917885414268870132059435602256107039667340339441452446531848556956815160));
 
+  // console.log(a.args)
   return (
     <Main>
       <Img src={require('../assets/project3.jpg')} width='340' height='180' />
@@ -25,7 +31,7 @@ const Poster =  () => {
       </MainProject>
     </Main>
   );
-}
+};
 
 const Main = styled.span`
     display: flex;
@@ -66,6 +72,5 @@ flex : 1;
 font-size: 20px;
 display: flex;
 align-items : center;
-`
+`;
 
-export default Poster;

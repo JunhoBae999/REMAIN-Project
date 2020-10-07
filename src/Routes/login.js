@@ -9,7 +9,6 @@ import RemainToken from "../RemainToken.js";
 export default function Login() {
   if (typeof web3 !== 'undefined') {
     console.log('Metamask가 설치되어 있습니다.')
-    window.ethereum.enable();
   }
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
