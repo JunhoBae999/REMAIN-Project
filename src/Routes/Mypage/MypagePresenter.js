@@ -1,23 +1,23 @@
-import React from 'react';
+import React, { useState } from "react";
 import styled from "styled-components";
 import { AiOutlineSetting } from "react-icons/ai";
+import { authService} from 'fbase';
 
-export default function MypageScreen({userObj}) {
-  console.log(userObj)
+export default function MypageScreen(user) {
     return (
 <Main>
   <View>
-  <Img src={require('../../assets/project1.jpg')} width='200' height='200'/>
+  <Img src={user.user.photoURL} width='200' height='200'/>
   </View>
   <View >
     <Span>
-    이한나  
+    {user.user.displayName}  
       <AiOutlineSetting />
     </Span>
   </View>
   <View>
-    <Detail>MEMBER| LV.2 루키|</Detail>
-    <Detail>가입일 2020. 03. 02</Detail>
+    <Detail>MEMBER| LV.1 루키|</Detail>
+    <Detail>가입일 {user.user.time.substr(4,12)}</Detail>
   </View>
   <Contents>
     <Content>

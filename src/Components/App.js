@@ -8,10 +8,12 @@ function App() {
   const [userObj, setUserObj] = useState(null);
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
+      console.log(user);
       if (user) {
         setUserObj({
           displayName: user.displayName,
-          uid: user.uid,
+          photoURL: user.photoURL,
+          time : user.metadata.creationTime,
           updateProfile: (args) => user.updateProfile(args),
         });
       } else {
@@ -33,7 +35,6 @@ function App() {
       {init ? (
         <>
         <Router
-          refreshUser={refreshUser}
           isLoggedIn={Boolean(userObj)}
           userObj={userObj}
         />
