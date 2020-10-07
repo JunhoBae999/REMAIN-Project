@@ -4,11 +4,19 @@ import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 import { MdArrowBack } from "react-icons/md";
+import { authService } from "fbase";
+import { useHistory } from "react-router-dom";
 
-export default withRouter(({ location: { pathname } }) => 
+export default withRouter(({ location: { pathname } }) => {
+  const history = useHistory();
+  const onLogOutClick = () => {
+    authService.signOut();
+    history.push("/");
+  };
+  return (
   <Header>
     <List>
-      <MdArrowBack />
+      <MdArrowBack onClick={onLogOutClick} />
       <Text>RE : Main</Text>
       <FiMenu />
     </List>
@@ -35,7 +43,7 @@ export default withRouter(({ location: { pathname } }) =>
         <SLink to="/token">토큰</SLink>
       </Item>
     </List>
-  </Header>
+  </Header>)}
 );
 
 const Nothing = styled.header`
