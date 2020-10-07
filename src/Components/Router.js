@@ -30,7 +30,9 @@ export default ({ isLoggedIn, userObj }) => {
           <Route exact path="/"  component={Home} />
           <Route exact path="/theme" component={Theme} />
           <Route exact path="/theme/:id" component={RelatedPoster} />
-          <Route exact path="/theme/:id/TOUR" component={Tour}  />
+          <Route path="/theme/:id/TOUR">
+              <Tour user={user} />
+          </Route>
           <Route exact path="/theme/:id/DONATION" component={Donation} />
           <Route path="/mypage">
               <Mypage user={user} />
