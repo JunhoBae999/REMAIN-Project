@@ -5,8 +5,7 @@ import { FaSearch } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 import { MdArrowBack } from "react-icons/md";
 
-export default withRouter(({ location: { pathname } }) => (
-  pathname === "/" ? (<Nothing />): (
+export default withRouter(({ location: { pathname } }) => 
   <Header>
     <List>
       <MdArrowBack />
@@ -20,8 +19,8 @@ export default withRouter(({ location: { pathname } }) => (
       </Search>      
     </List>
     <List>
-      <Item current={pathname === "/home"}>
-        <SLink to="/home">홈</SLink>
+      <Item current={pathname === "/"}>
+        <SLink to="/">홈</SLink>
       </Item>
       <Item current={pathname.substr(0,6) === "/theme"}>
         <SLink to="/theme">테마별</SLink>
@@ -37,7 +36,7 @@ export default withRouter(({ location: { pathname } }) => (
       </Item>
     </List>
   </Header>
-)));
+);
 
 const Nothing = styled.header`
 `;

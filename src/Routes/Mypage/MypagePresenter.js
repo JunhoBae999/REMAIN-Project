@@ -2,7 +2,8 @@ import React from 'react';
 import styled from "styled-components";
 import { AiOutlineSetting } from "react-icons/ai";
 
-export default function MypageScreen() {
+export default function MypageScreen({userObj}) {
+  console.log(userObj)
     return (
 <Main>
   <View>
