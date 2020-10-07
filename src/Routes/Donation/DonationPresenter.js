@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useState } from "react";
 import styled from "styled-components";
 import {FaHandPointDown } from "react-icons/fa";
 
 export default function Donation() {
+
+  const [eth, setEth] = useState(0);
+  const [error, setError] = useState("");
+  const onChange = (event) => {
+    const {
+      target: { name, value },
+    } = event;
+    setEth(value);
+  };
+  const onSubmit = async (event) => {
+     /* 여기 작업하시면 될 것 같습니다 */
+     /* eth이 입력한 돈 값입니다 */
+     console.log(eth);
+  }
   return (
     <Main>
     <LineArea1>
@@ -16,6 +30,18 @@ export default function Donation() {
        <Span>기부하고 싶어요!</Span>
       </Title>
       <SubTitle>4.3 ETH 모금중!</SubTitle>
+
+      <Loginbox onSubmit={onSubmit}>
+        <Logins name="money"
+          type="number"
+          required value={eth}
+          onChange={onChange}
+          className="authInput"
+          placeholder='Ether'  />         
+        <LoginBtn onClick={onSubmit}>
+          <LoginBtntext >기부하기!</LoginBtntext>
+        </LoginBtn>
+      </Loginbox>
       <LineArea2>
       <Line2 />
       </LineArea2>
@@ -147,4 +173,41 @@ const Btntext = styled.span`
    color: #333333;
    font-weight : bold;
    text-align : center;
+`
+
+
+const LoginBtn = styled.span`
+   background-color: black;
+   width: 100px;
+   border-radius: 15px;
+   margin-top : 10px;
+   height : 40px;
+   display: flex;
+   justify-content: center;
+   align-items : center;
+`
+
+const LoginBtntext = styled.span`
+   font-size : 20px;
+   color: white;
+   font-weight : bold;
+   text-align : center;
+`
+
+const Logins = styled.input`
+border: none;
+font-size: 15px;
+width: 100%;
+max-width: 400;
+border-bottom : 1px solid #BBBBBB;
+padding-bottom : 10px;
+margin-top: 10px;
+`
+const Loginbox = styled.form`
+   flex : 1;
+   justify-content: center;
+   align-items: center;
+   width : 70%;
+   display: flex;
+   flex-direction: column;
 `
