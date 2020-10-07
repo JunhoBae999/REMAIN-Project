@@ -6,6 +6,17 @@ import web3 from "../web3.js";
 
 
 export default function Poster() {
+  var data = RemainToken.events.allEvents({
+    filter: {_course: 
+      "제주도를 따라가다."}, // Using an array means OR: e.g. 20 or 23
+  }, function(error, event){ console.log(event); })
+  .on('data', function(event){
+    console.log(event); // same results as the optional callback above
+  })
+  .on('changed', function(event){
+    // remove event from local database
+  })
+  .on('error', console.error);
   return (
     <Main>
       <Img src={require('../assets/project3.jpg')} width='340' height='180' />
@@ -65,14 +76,4 @@ font-size: 20px;
 display: flex;
 align-items : center;
 `
-var data = RemainToken.events.allEvents({
-  filter: {_course: 
-    "제주도를 따라가다."}, // Using an array means OR: e.g. 20 or 23
-}, function(error, event){ console.log(event); })
-.on('data', function(event){
-  console.log(event); // same results as the optional callback above
-})
-.on('changed', function(event){
-  // remove event from local database
-})
-.on('error', console.error);
+
