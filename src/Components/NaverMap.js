@@ -10,13 +10,13 @@ function NaverMapAPI() {
         width: '340px', // 네이버지도 가로 길이
         height: '340px' // 네이버지도 세로 길이
       }}
-      defaultCenter={{ lat: 37.554722, lng: 126.970833 }} // 지도 초기 위치
-      defaultZoom={13}>
+      defaultCenter={{ lat: 33.4512, lng: 126.6189 }} // 지도 초기 위치
+      defaultZoom={16}>
       <Marker
         key={1}
-        position={new navermaps.LatLng(37.551229, 126.988205)}
-        animation={2}
-        onClick={() => {alert('목적지입니다.');}}
+        position={new navermaps.LatLng(33.4512, 126.6189)}
+        animation={1}
+        onClick={() => {alert('목적지인 제주 평화 공원입니다.');}}
       />
     </NaverMap>
   );

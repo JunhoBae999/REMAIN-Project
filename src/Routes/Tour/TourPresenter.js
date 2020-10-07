@@ -26,6 +26,7 @@ export default function Project() {
         <Left>제주 4.3 사건 TOUR 포스트에요</Left>
         <Button>  포스팅 구경하기<AiOutlineRight /> </Button>
       </SubTitle>
+       <TourApproved location={'제주 4.3 평화공원'} description={`제주 4·3 평화공원은 대한민국 제주특별자치도 제주시 봉개동에 위치한 공원으로, 4·3 사건의 희생자의 넋을 위령하고, 사건의 역사적 의미를 되새기고 희생자의 명예회복 및 평화와 인권을 위해서 조성되었다.`} />
       {datas.map(data => {
         return <TourApproved location={data[0]} description={data[1]} />
         })}
