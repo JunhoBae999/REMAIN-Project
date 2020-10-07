@@ -1,8 +1,27 @@
 import web3 from './web3';
 
 //contract address
-const address = "0x574f20c547b66bca3cf34757e9ba701e878d033d"
-const abi =[
+const address = "0x7d91ed4cd10929d4cc6634cc1d77809d6262bbcc"
+const abi = [
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
+			}
+		],
+		"name": "_getOwnedTokensCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -102,6 +121,30 @@ const abi =[
 		"type": "event"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_address",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "__index",
+				"type": "uint256"
+			}
+		],
+		"name": "getOwnersToken",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -125,7 +168,13 @@ const abi =[
 			{
 				"indexed": true,
 				"internalType": "uint256",
-				"name": "_id",
+				"name": "_locid",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "_courseId",
 				"type": "uint256"
 			}
 		],
@@ -193,6 +242,25 @@ const abi =[
 		],
 		"name": "registerLocations",
 		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			}
+		],
+		"name": "returnLocationValue",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -369,25 +437,6 @@ const abi =[
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_owner",
-				"type": "address"
-			}
-		],
-		"name": "_getOwnedTokensCount",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
 				"name": "owner",
 				"type": "address"
 			}
@@ -510,6 +559,25 @@ const abi =[
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "idToOwner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "owner",
 				"type": "address"
@@ -539,6 +607,30 @@ const abi =[
 				"internalType": "string",
 				"name": "",
 				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "ownedTokens",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -714,4 +806,4 @@ const abi =[
 	}
 ]
 
- export default new web3.eth.Contract(abi, address);
+ export default new web3.eth.Contract(abi,address);

@@ -6,14 +6,17 @@ import web3 from "../web3.js";
 
 
 export default function Poster() {
-  
-  var indexArray = new Array();
-  var jejuHash = 36864917885414268870132059435602256107039667340339441452446531848556956815160;
-  var jejuArray;
 
-  console.log(RemainToken.courseToLocations(36864917885414268870132059435602256107039667340339441452446531848556956815160));
+  var data;
 
-  // console.log(a.args)
+  RemainToken.events.Locations({filter:{_courseId:"36864917885414268870132059435602256107039667340339441452446531848556956815160"},fromBlock: 0,},function(error, event){ data = event.returnValues['_locname'];   console.log(data)
+})
+
+console.log(data)
+ 
+
+
+
   return (
     <Main>
       <Img src={require('../assets/project3.jpg')} width='340' height='180' />
