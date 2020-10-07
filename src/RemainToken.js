@@ -1,7 +1,7 @@
 import web3 from './web3.js';
 
 //contract address
-const address = "0x7d91ed4cd10929d4cc6634cc1d77809d6262bbcc"
+const address = "0xc394b0d31a1dd00d9b94d95108a1b013a0324b1c"
 const abi = [
 	{
 		"inputs": [
@@ -195,7 +195,7 @@ const abi = [
 			},
 			{
 				"internalType": "string",
-				"name": "_tokenURI",
+				"name": "uri",
 				"type": "string"
 			}
 		],
@@ -431,6 +431,25 @@ const abi = [
 		"name": "verifyUserLocation",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "_tokenURIs",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{

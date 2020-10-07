@@ -1,28 +1,25 @@
 import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
-import TourApproved from '../../Components/TourApporved'
+import TourApproved from '../../Components/TourApporved';
 import { AiOutlineRight } from "react-icons/ai";
 import RemainToken from "../../RemainToken.js";
+import { useAsync } from "react-async"
 
 
 
 export default function Project() {
-  async function Re() {
-    console.log(RemainToken.events.Locations({filter:{_courseId:"36864917885414268870132059435602256107039667340339441452446531848556956815160"},
-    fromBlock: 0, toBlock: 'latest',},  (error, event) => {
-       setData([event.returnValues['_locname'], ...data]);}));
-    RemainToken.events.Locations({filter:{_courseId:"36864917885414268870132059435602256107039667340339441452446531848556956815160"},
-    fromBlock: 0, toBlock: 'latest',}, (error, event) => {
-      setData([event.returnValues['_locname'], ...data]);});
-    console.log(data);
-  };
+  const [datas, setData] = useState([]);
+  var name = [];
+  const filter = {_courseId:"36864917885414268870132059435602256107039667340339441452446531848556956815160"};
+  var pastTransferEvents = RemainToken.getPastEvents('Locations', filter, {fromBlock: 0, toBlock: 'latest'});
+  useEffect( () => {pastTransferEvents.then( (events) => {
+    events.map( async (event) => {
+      await name.push([event.returnValues[1], event.returnValues[2]]);
+    })}).then(() => {
+      setData(name);
+    });
+  }, []);
 
-  const [init, setInit] = useState(true);
-  const [data, setData] = useState([]);
-  useEffect(Re, []);
-  console.log(data);
-  ;
-  
   return (
     <Main>
       <Title>여행지 인증 포스트</Title>
@@ -30,7 +27,9 @@ export default function Project() {
         <Left>제주 4.3 사건 TOUR 포스트에요</Left>
         <Button>  포스팅 구경하기<AiOutlineRight /> </Button>
       </SubTitle>
-      {data.map(data => <TourApproved data={data}/>)}        
+      {datas.map(data => {
+        return <TourApproved location={data[0]} description={data[1]} />
+        })}
     </Main>
   );
 }
