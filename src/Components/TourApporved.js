@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from "styled-components";
 import {AiOutlineLeft} from "react-icons/ai";
+import { Link } from "react-router-dom";
 
  
 export default function Poster({location, description}) {
  
   return (
-    <Main>
+    <Main to={`/theme/1/Map`}>
       <Img src={require('../assets/project3.jpg')} width='340' height='180' />
       <MainProject>
         <View>
@@ -27,7 +28,7 @@ export default function Poster({location, description}) {
   );
 };
 
-const Main = styled.span`
+const Main = styled(Link)`
     display: flex;
     flex-direction: row;
     height: 200px;

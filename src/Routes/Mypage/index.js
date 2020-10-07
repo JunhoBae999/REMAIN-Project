@@ -1,4 +1,4 @@
-import MypagePresenter from "./MypagePresenter";
+import MypagePresenter from "../Mypage/MypagePresenter";
 
 
 export default MypagePresenter;

@@ -3,7 +3,6 @@ import styled from "styled-components";
 import TourApproved from '../../Components/TourApporved';
 import { AiOutlineRight } from "react-icons/ai";
 import RemainToken from "../../RemainToken.js";
-import { useAsync } from "react-async"
 
 
 
@@ -19,7 +18,7 @@ export default function Project() {
       setData(name);
     });
   }, []);
-
+  var number = -1;
   return (
     <Main>
       <Title>여행지 인증 포스트</Title>

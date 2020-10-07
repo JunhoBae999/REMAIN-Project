@@ -4,10 +4,11 @@ import { AiOutlineSetting } from "react-icons/ai";
 import { authService} from 'fbase';
 import { useHistory } from 'react-router-dom';
 
-export default function MypageScreen(user) {
+export default function MypageScreen() {
+  var user = authService.currentUser;
   console.log(user);
-  const [username, setName] = useState(user.user.displayName);
-  const [userface, setFace] = useState(user.user.photoURL);
+  const [username, setName] = useState(user.displayName);
+  const [userface, setFace] = useState(user.photoURL);
   const [newAccount, setNewAccount] = useState(true);
   const [error, setError] = useState("");
   const onChange = (event) => {
@@ -22,13 +23,13 @@ export default function MypageScreen(user) {
   };
   const toggleAccount = () => setNewAccount((prev) => !prev);
   const onSubmit = async (event) => {
-    event.preventDefault();    
     try {
-      var user = await authService.currentUser;
+      user = await authService.currentUser;
       user.updateProfile({
           displayName: username,
           photoURL: userface,
         })
+      window.history.back();
     } catch (error) {
       console.log('error');
       alert(error.message);
@@ -48,7 +49,7 @@ export default function MypageScreen(user) {
   </View>
   <View>
     <Detail>MEMBER| LV.1 루키|</Detail>
-    <Detail>가입일 {user.user.time.substr(4,12)}</Detail>
+    <Detail>가입일 {user.metadata.creationTime.substr(4,12)}</Detail>
   </View>
 
   {!newAccount ? (

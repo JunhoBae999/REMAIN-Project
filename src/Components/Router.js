@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {
   HashRouter as Router,
   Route,
@@ -12,13 +12,13 @@ import Mypage from "Routes/Mypage";
 import Alarm from "Routes/Alarm";
 import Token from "Routes/Token";
 import Tour from "Routes/Tour";
+import Map from "Routes/Map";
 import Donation from "Routes/Donation";
 import Login from "Routes/login";
 import Header from "Components/Header";
 
 
-export default ({ isLoggedIn, userObj }) => {
-  const user = userObj;
+export default ({ isLoggedIn }) => {
   return (
   <Router>
        <Switch>    
@@ -30,12 +30,15 @@ export default ({ isLoggedIn, userObj }) => {
           <Route exact path="/"  component={Home} />
           <Route exact path="/theme" component={Theme} />
           <Route exact path="/theme/:id" component={RelatedPoster} />
-          <Route path="/theme/:id/TOUR">
-              <Tour user={user} />
+          <Route exact path="/theme/:id/TOUR">
+              <Tour />
+          </Route>
+          <Route exact path="/theme/:id/MAP">
+              <Map path="/theme/:id/MAP"/>
           </Route>
           <Route exact path="/theme/:id/DONATION" component={Donation} />
           <Route path="/mypage">
-              <Mypage user={user} />
+              <Mypage />
           </Route>
           <Route path="/alarm" component={Alarm} />
           <Route path="/token" component={Token}  />
