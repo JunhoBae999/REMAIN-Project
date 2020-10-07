@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from "react";
+import { authService } from "fbase.js";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import web3 from "../web3.js"
@@ -10,25 +11,66 @@ export default function Login() {
     console.log('Metamask가 설치되어 있습니다.')
     window.ethereum.enable();
   }
-  
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [newAccount, setNewAccount] = useState(true);
+  const [error, setError] = useState("");
+  const onChange = (event) => {
+    const {
+      target: { name, value },
+    } = event;
+    if (name === "email") {
+      setEmail(value);
+    } else if (name === "password") {
+      setPassword(value);
+    }
+  };
+  const toggleAccount = () => setNewAccount((prev) => !prev);
+  const onSubmit = async (event) => {
+    event.preventDefault();    
+    try {
+      let data;
+      if (!newAccount) {
+        data = await authService.createUserWithEmailAndPassword(
+          email,
+          password
+        );
+      } else {
+        data = await authService.signInWithEmailAndPassword(email, password);        
+      }
+    } catch (error) {
+      console.log('error');
+      alert(error.message);
+    }}
   return (
     <Container>
       <Mainbox>
         <Main>RE : Main</Main>
       </Mainbox>
-      <Loginbox>
-        <Logins placeholder='E-mail'  />
-        <Logins placeholder='Password' type='password'  />
+      <Loginbox onSubmit={onSubmit} className="container">
+        <Logins name="email"
+          type="email"
+          required value={email}
+          onChange={onChange}
+          className="authInput"
+          placeholder='E-mail'  />
+        <Logins 
+          name="password"
+          type="password"
+          placeholder="Password"
+          required value={password}
+          className="authInput"
+          onChange={onChange}  />
       </Loginbox>
       <Btnbox>
-        <LoginBtn to="/home">
-          <LoginBtntext >로그인</LoginBtntext>
+        <LoginBtn onClick={onSubmit} className="authSwitch">
+          <LoginBtntext >{newAccount ? ('로그인') : ('회원 등록')}</LoginBtntext>
         </LoginBtn>
-        <JoinBtn>
-          <JoinBtntext>개인 회원 가입</JoinBtntext>
+        <JoinBtn onClick={toggleAccount} className="authSwitch">
+          <JoinBtntext>{newAccount ? ('개인 회원 가입') : ('개인 회원 로그인')}</JoinBtntext>
         </JoinBtn>
-        <JoinBtn>
-          <JoinBtntext>단체 회원 가입</JoinBtntext>
+        <JoinBtn onClick={toggleAccount} >
+          <JoinBtntext>{newAccount ? ('단체 회원 가입') : ('단체 회원 로그인')}</JoinBtntext>
         </JoinBtn>
       </Btnbox>
     </Container>
@@ -58,7 +100,7 @@ font-weight: 500;
 display: flex;
 `
 
-const Loginbox = styled.li`
+const Loginbox = styled.form`
    flex : 6;
    justify-content: center;
    align-items: center;
@@ -88,7 +130,7 @@ display: flex;
 flex-direction: column;
 `
 
-const LoginBtn = styled(Link)`
+const LoginBtn = styled.span`
    background-color: #F4F4F4;
    border-radius: 15px;
    margin-top : 10px;

@@ -76,5 +76,3 @@ var data = RemainToken.events.allEvents({
   // remove event from local database
 })
 .on('error', console.error);
-
-console.log(data)

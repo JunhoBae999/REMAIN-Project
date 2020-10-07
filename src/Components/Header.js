@@ -5,8 +5,7 @@ import { FaSearch } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 import { MdArrowBack } from "react-icons/md";
 
-export default withRouter(({ location: { pathname } }) => (
-  pathname === "/" ? (<Nothing />): (
+export default withRouter(({ location: { pathname } }) => 
   <Header>
     <List>
       <MdArrowBack />
@@ -20,8 +19,8 @@ export default withRouter(({ location: { pathname } }) => (
       </Search>      
     </List>
     <List>
-      <Item current={pathname === "/home"}>
-        <SLink to="/home">홈</SLink>
+      <Item current={pathname === "/"}>
+        <SLink to="/">홈</SLink>
       </Item>
       <Item current={pathname.substr(0,6) === "/theme"}>
         <SLink to="/theme">테마별</SLink>
@@ -37,7 +36,7 @@ export default withRouter(({ location: { pathname } }) => (
       </Item>
     </List>
   </Header>
-)));
+);
 
 const Nothing = styled.header`
 `;
@@ -51,7 +50,7 @@ const Header = styled.header`
   top: 0;
   left: 0;
   width: 100%;
-  height: 120px;
+  height: 150px;
   display: flex;
   z-index: 10;
   box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.1);
@@ -63,7 +62,7 @@ const List = styled.ul`
   padding-left : 10px;
   padding-right : 10px;
   font-size: 20px;
-  flex : 1;
+  height: 50px;
   width : 100%;
   flex-direction: row;
   align-items: center;
@@ -75,7 +74,7 @@ const Item = styled.li`
   width: 20%;
   min-width: 60px;
   max-width: 100px;
-  height: 40px;
+  height: 50px;
   text-align: center;
   color: ${props => (props.current ? "#000000" : "rgba(200, 200, 200, 0.9)")};;
   border-bottom: 1px solid
@@ -120,7 +119,6 @@ width: 70%;
 max-width: 500;
 border: 1px solid #CCCCCC;
 border-radius: 30px;
-padding-left: 10px;
 justify-content: space-between;
 margin-left : 15%;
 `;

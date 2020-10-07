@@ -2,13 +2,18 @@ import React from 'react';
 import styled from "styled-components";
 import Project from '../../Components/Project';
 import Campaign from '../../Components/Campaign';
+import Advertise from '../../Components/Advertisement'
 
 export default function HomePresenter() {
   return (
+    <>
+    <Advertise />
     <Main>
+      
       <Project />
       <Campaign />
     </Main>
+    </>
   );
 }
 
