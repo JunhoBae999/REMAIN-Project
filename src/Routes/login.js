@@ -1,8 +1,16 @@
 import React from 'react';
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import web3 from "../web3.js"
+import RemainToken from "../RemainToken.js";
+
 
 export default function Login() {
+  if (typeof web3 !== 'undefined') {
+    console.log('Metamask가 설치되어 있습니다.')
+    window.ethereum.enable();
+  }
+  
   return (
     <Container>
       <Mainbox>
