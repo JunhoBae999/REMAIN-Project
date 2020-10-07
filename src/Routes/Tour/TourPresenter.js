@@ -23,7 +23,6 @@ export default function Project() {
   console.log(data);
   ;
   
-  
   return (
     <Main>
       <Title>여행지 인증 포스트</Title>

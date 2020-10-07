@@ -36,6 +36,7 @@ export default function Donation() {
          alert("이더는 스마트 컨트랙트에 보관됩니다. 기관의 사용내역이 인증되고난 후 실제 전송됩니다.")
       })
       const ContractBalance = await web3.eth.getBalance("0x5ae57492a6f2183b973e658ebd529aee7e1d0313")
+      console.log("컨트랙트 잔액: ")
       console.log(ContractBalance);
    }
    
